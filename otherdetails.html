@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mwananchi Credit - Loan Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1A5F7A;
+            --secondary-color: #159895;
+            --background-color: #F8F9FA;
+            --text-color: #333;
+            --accent-color: #57C5B6;
+            --light-accent: #9BE8D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--background-color) 0%, #E9ECEF 100%);
+            line-height: 1.6;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 40px;
+            flex-grow: 1;
+        }
+
+        .loan-intro {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: var(--primary-color);
+        }
+
+        .loan-intro h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .loan-intro p {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            max-width: 500px;
+        }
+
+        .registration-container {
+            flex: 1;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.07);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .registration-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header h3 {
+            color: var(--secondary-color);
+            font-weight: 300;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .form-group input, 
+        .form-group select {
+            padding: 12px;
+            border: 1.5px solid #E0E0E0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(21, 152, 149, 0.2);
+        }
+
+        .referee-section {
+            /*background-color: var(--light-accent);*/
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .referee-title {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 25px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(21, 152, 149, 0.2);
+        }
+
+        .note {
+            text-align: center;
+            margin-top: 15px;
+            color: var(--secondary-color);
+            font-size: 0.8em;
+        }
+
+        .disclaimer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: var(--secondary-color);
+        }
+
+        .disclaimer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .loan-intro, .registration-container {
+                width: 100%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid white;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+        <div class="loan-intro">
+            <h1></h1>
+            <p></p>
+        </div>
+
+        <div class="registration-container">
+            <div class="header">
+                <h2>Comprehensive Loan Application</h2>
+                <h3></h3>
+            </div>
+
+            <form id="loanForms">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="education">Level of Education</label>
+                        <select id="education" required>
+                            <option value="" disabled selected>Select Education Level</option>                    
+                            <option value="Secondary and High School">Secondary and High School</option>                    
+                            <option value="Diploma and Certificate">Diploma and Certificate</option>
+                            <option value="Bachelor Degree">Bachelor Degree</option>
+                            <option value="Master Degree">Master Degree</option>
+                            <option value="PHD Degree">PHD Degree</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employment">Employment Status</label>
+                        <select id="employment" required>
+                            <option value="" disabled selected>Select Employment</option>                    
+                            <option value="Student">Student</option>
+                            <option value="Working">Working</option>                  
+                            <option value="Unemployed">Unemployed</option>
+                            <option value="Self-employed">Self-employed</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Income">Monthly Income</label>
+                        <select id="Income" required>
+                            <option value="" disabled selected>Select Income Range</option>                    
+                            <option value="0-10000">0 - 10,000</option>
+                            <option value="10000-25000">10,000 - 25,000</option>                  
+                            <option value="25000-35000">25,000 - 35,000</option>
+                            <option value="35000-45000">35,000 - 45,000</option>
+                            <option value="50000+">50,000 +</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="LoanPurpose">Loan Purpose</label>
+                        <select id="LoanPurpose" required>
+                            <option value="" disabled selected>Select Loan Purpose</option>                    
+                            <option value="Personal Expense">Personal Expense</option>
+                            <option value="Business Loan">Business Loan</option>                  
+                            <option value="Emergency Loan">Emergency Loan</option>
+                            <option value="Student Loan">Student Loan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="referee-section">
+                    <div class="referee-title">Referee Details *</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="Refname">Referee Name</label>
+                            <input id="Refname" placeholder="Full Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Refphone">Referee Phone Number</label>
+                            <input id="Refphone" placeholder="Phone Number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Relationship">Relationship</label>
+                            <select id="Relationship" required>
+                                <option value="" disabled selected>Select Relationship</option>
+                                <option value="Parent">Parent</option>
+                                <option value="Brother">Brother</option>
+                                <option value="Sister">Sister</option>
+                                <option value="Friend">Friend</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Details</button>
+            </form>
+
+            <p class="note">No CRB Check • No Guarantors • Disbursed to MPESA • No Paperwork</p>
+
+            <p class="disclaimer">
+                By submitting you confirm that you accept the <a href="#">Terms and Conditions</a> and
+                <a href="#">Privacy Policy</a>.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Mwananchi Credit. Empowering Financial Freedom | <a href="#">Home</a> | <a href="#">Contact</a></p>
+    </footer>
+
+    <script>
+        document.getElementById("loanForms").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const education = document.getElementById("education").value;
+            const employment = document.getElementById("employment").value;
+            const Income = document.getElementById("Income").value;
+            const LoanPurpose = document.getElementById("LoanPurpose").value;
+            const Refname = document.getElementById("Refname").value;
+            const Refphone = document.getElementById("Refphone").value;
+            const Relationship = document.getElementById("Relationship").value;
+
+            if (!education || !employment || !Income || !LoanPurpose || !Refname || !Refphone || !Relationship) {
+                alert("Please fill in all fields before submitting.");
+                return;
+            }
+
+            localStorage.setItem("educate", education);
+            localStorage.setItem("employ", employment);
+            localStorage.setItem("income", Income);
+            localStorage.setItem("loanPurpose", LoanPurpose);
+            localStorage.setItem("refName", Refname);
+            localStorage.setItem("refPhone", Refphone);
+            localStorage.setItem("relationship", Relationship);
+            localStorage.setItem('visited', 'true');
+
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            //localStorage.clear();
+
+            function showLoading() {
+            loadingOverlay.style.display = 'flex';
+            }
+
+            function hideLoading() {
+            loadingOverlay.style.display = 'none';
+            }
+
+            showLoading();
+            setTimeout(() => {
+              window.location.href = 'eligibilitycheck.html';
+              hideLoading();
+          }, 2000);
+
+            
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Authorization</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1A5F7A;
+            --secondary-color: #159895;
+            --background-color: #F8F9FA;
+            --text-color: #333;
+            --accent-color: #57C5B6;
+            --light-accent: #9BE8D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--background-color) 0%, #E9ECEF 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .authorization-container {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.07);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .authorization-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        .gif-container {
+            margin: 25px 0;
+        }
+
+        .gif-container img {
+            max-width: 80px;
+            height: auto;
+            border-radius: 12px;
+            /*background: transparent;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);*/
+        }
+
+        .timer {
+            font-size: 1.1em;
+            color: var(--secondary-color);
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .status-message {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .continue-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(21, 152, 149, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .authorization-container {
+                padding: 25px;
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="authorization-container">
+        <div class="header">
+            <h1>Loan Eligibility</h1>
+        </div>
+        
+        <div class="gif-container">
+            <img id="gifcontent" src="assets/pro.gif" alt="Authorization Process">
+        </div>
+
+        <div id="timer" class="timer">Requesting verification...</div>
+
+        <div id="eligibilitylbl" class="status-message">
+            The system is evaluating your loan eligibility and limit.
+        </div>
+
+        <button id="continueBtn" class="continue-btn" onclick="nextpage()" style="display: none;">
+            Check Loan Limit
+        </button>
+    </div>
+
+    <script>
+        const continueBtn = document.getElementById('continueBtn');
+        const gifContent = document.getElementById('gifcontent');
+        const timerElement = document.getElementById('timer');
+        const eligibilityLabel = document.getElementById('eligibilitylbl');
+
+        let timeLeft = 1;
+
+        function updateTimer() {
+            if (timeLeft >= 11) {
+                clearInterval(timerInterval);
+                timerElement.textContent = "✔ Completed Successfully!";
+                continueBtn.style.display = 'block';
+                eligibilityLabel.textContent = "Congratulations! You qualify for a loan.";
+            } else {
+                if (timeLeft === 5) {
+                    timerElement.textContent = "Calculating your loan limit: 47%";
+                } else if (timeLeft === 7) {
+                    timerElement.textContent = "Calculating your loan limit: 74%";
+                } else if (timeLeft >= 3) {
+                    timerElement.textContent = `Calculating your loan limit: ${timeLeft}0%`;
+                }
+                timeLeft++;
+            }
+        }
+
+        function nextpage() {
+            gifContent.src = "assets/process.gif";
+            setTimeout(() => {
+                window.location.href = 'savings.html';
+            }, 5000);
+        }
+
+        const timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>

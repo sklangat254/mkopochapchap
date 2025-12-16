@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Mkopo Chapchap - Your Financial Partner</title>
+    <style>
+        :root {
+            --primary-color: #1A5F7A;
+            --secondary-color: #159895;
+            --background-color: #F8F9FA;
+            --text-color: #333;
+            --accent-color: #57C5B6;
+            --light-accent: #9BE8D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--background-color) 0%, #E9ECEF 100%);
+            line-height: 1.6;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            margin-left: 0px;
+            max-width: 730px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.07);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bolt {
+            color: var(--primary-color);
+            font-size: 1.4em;
+        }
+
+        h1 {
+            color: white;
+            margin-top: 20px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        .loan-message {
+            background-color: var(--light-accent);
+            padding: 20px;
+            margin: -8px;
+            border-radius: 12px;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        .verify-buttons {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .verify-buttons:hover {
+            transform: translateY(-2px);
+        }
+
+        .loan-table {
+            margin: 5px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--light-accent);
+            margin-top: 20px;
+        }
+
+        .loan-table > div {
+            display: flex;
+            border-bottom: 1px solid var(--light-accent);
+        }
+
+        .loan-table .label, .loan-table .labels {
+            flex: 1;
+            padding: 7px;
+            background-color: white;
+            color: var(--text-color);
+            font-weight: 300;
+        }
+
+        .loan-table .label:first-child, .loan-table .labels:first-child {
+            background-color: var(--light-accent);
+            color: var(--primary-color);
+        }
+
+        .status-pending {
+            background: linear-gradient(135deg, #2ed87c 0%, #26d672 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            /*display: inline-flex;*/
+            width: 100%;
+            align-items: center;
+            gap: 4px;
+            font-weight: 400;
+            box-shadow: 0 2px 8px rgba(38, 214, 114, 0.3);
+            transition: background 0.5s ease, box-shadow 0.5s ease;
+            margin-top: 20px;
+        }
+
+        .status-not-verified {
+            background: linear-gradient(135deg, #ff1a1a 0%, #e6061d 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            /*display: inline-flex;*/
+            width: 100%;
+            align-items: center;
+            gap: 4px;
+            font-weight: 400;
+            box-shadow: 0 2px 8px rgba(230, 6, 29, 0.3);
+            transition: all 0.5s ease;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            color: var(--secondary-color);
+            margin-top: 20px;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">
+                     Mkopo Chapchap
+                    <div class="logo-circle">
+                        <span class="bolt">⚡</span>
+                    </div>
+                </div>
+            </div>
+            <h1>Congratulations! Your Loan Application is Being Processed.</h1>
+        </div>
+
+        <div class="loan-message">
+            Great news! Your loan application has been successfully received and is currently under priority review. Our automated system is working to process your request quickly. Your M-Pesa account will be credited immediately once the review is completed.
+            <button class="verify-buttons">View Your Loan Application Details</button>
+        </div>
+
+        <div class="loan-table">
+            <div>
+                <div class="label">Name :</div>
+                <div class="label" id="loan-type">Personal Loan</div>
+            </div>
+            <div>
+                <div class="labels">Applied Amount :</div>
+                <div class="labels" id="limit">Ksh. 6,500</div>
+            </div>
+            <div>
+                <div class="label">Loan Status :</div>
+                <div class="label">
+                    <span class="status-pending" id="processingStatus">Processing...</span>
+                </div>
+            </div>
+            <div>
+                <div class="labels">Account Savings :</div>
+                <div class="labels" id="savingamount">Ksh. 150</div>
+            </div>
+            <div>
+                <div class="label">Transfer Status :</div>
+                <div class="label">
+                    <span class="status-not-verified" id="disbursementStatus">Pending</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2024  Mkopo Chapchap | Your Trusted Financial Partner
+        </div>
+    </div>
+
+    <script>
+        // The original JavaScript remains the same as in the previous document
+        //localStorage.clear();
+        let limit = document.getElementById('limit');
+        let savingsamount = document.getElementById('savingamount');
+        let processingStatus = document.getElementById('processingStatus');
+        let disbursementStatus = document.getElementById('disbursementStatus');
+        
+        let lims = parseFloat(localStorage.getItem('limit')) || 6500.00;    
+        let savingamount = parseFloat(localStorage.getItem('saveamount')) || 150.00;        
+        limit.textContent = "Ksh " + (lims.toFixed(2));
+        savingsamount.textContent = "Ksh " + (savingamount.toFixed(2));        
+        const loanType = localStorage.getItem("name") || "Personal Loan";
+        document.getElementById("loan-type").textContent = loanType;
+
+        // Timer functionality remains the same as in the original script
+        const startTime = 90;
+        const timerElement = document.getElementById('timer');
+        const timerContainer = document.getElementById('timerContainer');
+
+        let endTime = localStorage.getItem('timerEndTime');
+        if (!endTime) {
+            endTime = new Date().getTime() + (startTime * 1000);
+            localStorage.setItem('timerEndTime', endTime);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const timeLeft = Math.max(0, Math.floor((endTime - now) / 1000));
+
+            if (timeLeft > 0) {
+                if (timerElement) timerElement.textContent = formatTime(timeLeft);
+                setTimeout(updateTimer, 1000);
+            } else {
+                localStorage.removeItem('timerEndTime');
+                processingStatus.textContent = '✔ Processed';
+                processingStatus.style.background = 'linear-gradient(to right, #57C5B6, #1A5F7A)';
+                disbursementStatus.textContent = 'Initiating...';
+                disbursementStatus.style.background = '#2ed87c';
+            }
+        }
+
+        const timeLeft = Math.max(0, Math.floor((endTime - new Date().getTime()) / 1000));
+        if (timeLeft > 0) {
+            updateTimer();
+        } else {
+            processingStatus.textContent = '✔ Processed';
+            processingStatus.style.background = 'linear-gradient(to right, #57C5B6, #1A5F7A)';
+            disbursementStatus.textContent = 'Initiating...';
+            disbursementStatus.style.background = '#2ed87c';
+        }
+    </script>
+</body>
+</html>
