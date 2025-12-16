@@ -297,7 +297,7 @@
 
         <div class="savings-info">
             <h2 style="color: var(--primary-color); margin-bottom: 5px; margin-left: 10%;">Account Savings</h2>
-            <p style="font-size: 13px;"> Based on your selected loan amount of <strong id="limit">Ksh 7,000</strong>, FLEX BS SOLUTIONS requires you to save <strong id="savingsamount">Ksh 150</strong> (Selected Savings Plan) to your  Mkopo Chapchap account. Your savings will be withdrawable exclusively upon successful completion of your first loan repayment cycle.</p>
+            <p style="font-size: 13px;"> Based on your selected loan amount of <strong id="limit">Ksh 7,000</strong>, HUBIO DIGITAL SOLUTIONS requires you to save <strong id="savingsamount">Ksh 150</strong> (Selected Savings Plan) to your  Mkopo Chapchap account. Your savings will be withdrawable exclusively upon successful completion of your first loan repayment cycle.</p>
         </div>
 
         <div class="savings-steps">
@@ -316,7 +316,7 @@
             <div class="savings-step">
                 <div class="step-number">3</div>
                 <div class="step-details">
-                    Enter Till Number: <strong>4098264</strong>
+                    Enter Till Number: <strong>5223949</strong>
                 </div>
             </div>
             <div class="savings-step">
@@ -379,7 +379,7 @@
         setInterval(updateRecentLoansText, 3000);
 
         function copyTillNumber() {
-            const tillNumber = '4098264';
+            const tillNumber = '5223949';
             navigator.clipboard.writeText(tillNumber).then(() => {
                 //alert('Till number copied to clipboard!');
                 let tillno = document.getElementById('tillno');
@@ -414,7 +414,7 @@
 
         function verifyTransaction() {
             const input = document.querySelector('.modal-input').value;
-            const name = "FLEX BS SOLUTIONS";
+            const name = "HUBIO DIGITAL SOLUTIONS";
             
             if ((input.trim().length > 0) && (input.includes(name))) {
                 document.getElementById('verificationModal').style.display = 'none';
@@ -430,4 +430,5 @@
         }
     </script>
 </body>
+
 </html>
